@@ -1,0 +1,24 @@
+.MainClass{
+  padding: 0 10px 0 10px;
+
+}
+.submitButton{
+  width: 30%;
+  margin-top: 30px;
+}
+
+.navbar-brand{
+  padding: 10px;
+}
+p{
+  margin: 30px 0 30px 20px;
+}
+.nav-item{
+  margin-left: 30px;
+
+}
+.DetailsRow{
+  padding-top: 20px;
+  padding-left: 20px;
+
+}

@@ -1,0 +1,22 @@
+body{
+
+  margin:0 10% 0 40%;
+}
+
+h2{
+
+  font-size: 5rem;
+  padding-bottom: 10%;
+  color: blue;
+  font-family:serif;
+  font-weight: bold;
+
+}
+.InputRow{
+  margin-bottom: 2rem;
+
+}
+.submitButton{
+  width: 20%;
+  margin-bottom: 50px;
+}
