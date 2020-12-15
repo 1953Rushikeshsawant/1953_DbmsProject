@@ -15,7 +15,7 @@ $DEPARTMENT_NAME=$_POST['DEPARTMENT'];
 $DESIGNATION=$_POST['DESIGNATION'];
 $GENDER=$_POST['GENDER'];
 
-$mysqli = new mysqli("localhost", "root", "", "salarymanagementsystem");
+$mysqli = new mysqli("localhost", "root", "", "salarymanagementsytem2");
 
 
 if($mysqli === false){
@@ -27,14 +27,36 @@ $sql = "UPDATE Employee
 SET FNAME = '$FNAME', LNAME= '$LNAME',CITY = '$CITY',STATE = '$STATE',DOB = '$DOB',PHONE_NO = '$PHONE_NO',BANK_ACC_NO = '$BANK_ACC_NO',GENDER='$GENDER'
 WHERE EMAIL='$EMAIL' AND EID='$EID'";
 
+//IF FINANCE AND SENIOR
 $sql2="INSERT INTO DEPARTMENT (DEPT_NAME,DESIGNATION,EID) VALUES ('$DEPARTMENT_NAME','$DESIGNATION','$EID')";
+// if('$DEPARTMENT_NAME'=='FINANCE')
+// {
+//   if('$DESIGNATION'=='SENIOR'){
+    $sql3="UPDATE DEPARTMENT SET FID='2' WHERE DEPT_NAME='FINANCE' AND DESIGNATION='SENIOR' AND EID='$EID'";
+    $sql4="UPDATE DEPARTMENT SET FID='1' WHERE DEPT_NAME='FINANCE' AND DESIGNATION='JUNIOR' AND EID='$EID'";
+    $sql5="UPDATE DEPARTMENT SET FID='3' WHERE DEPT_NAME='FINANCE' AND DESIGNATION='TEMPORARY' AND EID='$EID'";
+
+    $sql6="UPDATE DEPARTMENT SET FID='4' WHERE DEPT_NAME='HR' AND DESIGNATION='SENIOR' AND EID='$EID'";
+    $sql7="UPDATE DEPARTMENT SET FID='5' WHERE DEPT_NAME='HR' AND DESIGNATION='JUNIOR' AND EID='$EID'";
+    $sql8="UPDATE DEPARTMENT SET FID='6' WHERE DEPT_NAME='HR' AND DESIGNATION='TEMPORARY' AND EID='$EID'";
+
+    $sql9="UPDATE DEPARTMENT SET FID='7' WHERE DEPT_NAME='SALES' AND DESIGNATION='SENIOR' AND EID='$EID'";
+    $sql22="UPDATE DEPARTMENT SET FID='8' WHERE DEPT_NAME='SALES' AND DESIGNATION='JUNIOR' AND EID='$EID'";
+    $sql23="UPDATE DEPARTMENT SET FID='9' WHERE DEPT_NAME='SALES' AND DESIGNATION='TEMPORARY' AND EID='$EID'";
 
 
-if($mysqli->query($sql) === true && $mysqli->query($sql2) === true ){
+
+//   }
+// }
+
+
+if($mysqli->query($sql) === true && $mysqli->query($sql2) === true && ( $mysqli->query($sql3) === true ||
+$mysqli->query($sql4) === true ||$mysqli->query($sql5) === true ||$mysqli->query($sql6) === true ||
+$mysqli->query($sql7) === true ||$mysqli->query($sql8) === true ||$mysqli->query($sql9) === true ||
+$mysqli->query($sql22) === true ||$mysqli->query($sql23) === true) ){
     echo "Records inserted successfully.";
 // <input type="button" onclick="alert(\'Clicky!\')"/>;
 echo "<script>alert('received!'); location.href='AddEmployee.html';</script>";
-echo '<pre>' . print_r($_SESSION, TRUE) . '</pre>';
 
 
 } else{

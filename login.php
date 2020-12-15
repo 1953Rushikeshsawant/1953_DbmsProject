@@ -9,7 +9,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     exit;
 }
 
-$mysqli = new mysqli("localhost", "root", "", "salarymanagementsystem");
+$mysqli = new mysqli("localhost", "root", "", "salarymanagementsytem2");
 
 if($mysqli === false){
     die("ERROR: Could not connect. " . $mysqli->connect_error);

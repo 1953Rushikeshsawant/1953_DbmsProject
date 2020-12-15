@@ -1,6 +1,6 @@
 <?php
-
-$mysqli = new mysqli("localhost", "root", "", "salarymanagementsystem");
+session_start();
+$mysqli = new mysqli("localhost", "root", "", "salarymanagementsytem2");
 
 
 if($mysqli === false){

@@ -3,20 +3,23 @@ session_start();
 // Check existence of id parameter before processing further
 if(isset($_GET["EID"]) && !empty(trim($_GET["EID"]))){
   // Include config file
-  $mysqli = new mysqli("localhost", "root", "", "salarymanagementsystem");
+  $mysqli = new mysqli("localhost", "root", "", "salarymanagementsytem2");
   if($mysqli === false){
     die("ERROR: Could not connect. " . $mysqli->connect_error);
   }
 
-  // Prepare a select statement
-  $sql = "SELECT * FROM SALARY WHERE SID = ?";
+  // Prepare a select statement  FIXED SALARY AND SALARY
+  // $sql = "SELECT * FROM SALARY WHERE EID = ?";
 
-  if($stmt = $mysqli->prepare($sql)){
+  $sql2= "SELECT * FROM DEPARTMENT,FIXED_SALARY WHERE EID=? AND DEPARTMENT.FID=FIXED_SALARY.FID ";
+
+  if($stmt = $mysqli->prepare($sql2) ){
+
     // Bind variables to the prepared statement as parameters
     $stmt->bind_param("i", $param_id);
 
     // Set parameters
-    
+
     $param_id = trim($_GET["EID"]);
 
     // Attempt to execute the prepared statement
@@ -30,7 +33,7 @@ if(isset($_GET["EID"]) && !empty(trim($_GET["EID"]))){
         // Retrieve individual field value
 
 
-        $EMI=$row['EMI'] ;
+      //  $EMI=$row['EMI'] ;
         $BASIC_DAA=$row['BASIC_DAA'] ;
         $HRA= $row['HRA'] ;
         $CONVEYANCE=$row['CONVEYANCE'] ;
@@ -38,9 +41,9 @@ if(isset($_GET["EID"]) && !empty(trim($_GET["EID"]))){
         $PF= $row['PF'] ;
         $TAX=$row['TAX'] ;
 
-        $EARNING= $row['EARNING'] ;
-        $DEDUCTION=$row['DEDUCTION'] ;
-        $NET_SALARY= $row['NET_SALARY'] ;
+        // $EARNING= $row['EARNING'] ;
+        // $DEDUCTION=$row['DEDUCTION'] ;
+        // $NET_SALARY= $row['NET_SALARY'] ;
       } else{
         // URL doesn't contain valid id parameter. Redirect to error page
         header("location: error.php");
@@ -85,12 +88,12 @@ if(isset($_GET["EID"]) && !empty(trim($_GET["EID"]))){
           <div class="page-header">
             <h1>View SALARY</h1>
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label>EMI</label>
             <p class="form-control-static"><?php echo $row["EMI"]; ?></p>
-          </div>
+          </div> -->
           <div class="form-group">
-            <label>BASIC_DA</label>
+            <label>BASIC_DAA</label>
             <p class="form-control-static"><?php echo $row["BASIC_DAA"]; ?></p>
           </div>
           <div class="form-group">
@@ -113,7 +116,7 @@ if(isset($_GET["EID"]) && !empty(trim($_GET["EID"]))){
             <label>TAX</label>
             <p class="form-control-static"><?php echo $row["TAX"]; ?></p>
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label>DEDUCTION</label>
             <p class="form-control-static"><?php echo $row["DEDUCTION"]; ?></p>
           </div>
@@ -124,7 +127,7 @@ if(isset($_GET["EID"]) && !empty(trim($_GET["EID"]))){
           <div class="form-group">
             <label>NET SALARY</label>
             <p class="form-control-static"><?php echo $row["NET_SALARY"]; ?></p>
-          </div>
+          </div> -->
           <p><a href="AccViewSalary.php" class="btn btn-primary">Back</a></p>
         </div>
       </div>

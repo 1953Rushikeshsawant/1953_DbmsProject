@@ -1,7 +1,7 @@
 <?php
 session_start();
 // Include config file
-$mysqli = new mysqli("localhost", "root", "", "salarymanagementsystem");
+$mysqli = new mysqli("localhost", "root", "", "salarymanagementsytem2");
 if($mysqli === false){
   die("ERROR: Could not connect. " . $mysqli->connect_error);
 }

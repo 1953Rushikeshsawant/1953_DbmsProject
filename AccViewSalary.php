@@ -37,14 +37,14 @@
           </div>
 
           <?php
-          $mysqli = new mysqli("localhost", "root", "", "salarymanagementsystem");
+          $mysqli = new mysqli("localhost", "root", "", "salarymanagementsytem2");
           if($mysqli === false){
             die("ERROR: Could not connect. " . $mysqli->connect_error);
           }
 
           // Attempt select query execution
           //$sql = "SELECT * FROM employee";
-          $sql="SELECT * FROM SALARY,EMPLOYEE WHERE SALARY.SID=EMPLOYEE.EID ";
+          $sql="SELECT * FROM SALARY,EMPLOYEE WHERE SALARY.EID=EMPLOYEE.EID ";
 
           if($result = $mysqli->query($sql)){
             if($result->num_rows > 0){
@@ -63,7 +63,7 @@
               echo "<th>BANK_ACC_NO</th>";
               // echo "<th>GENDER</th>";
 
-              // echo "<th>EMI</th>";
+               echo "<th>EMI</th>";
               // echo "<th>BASIC & DA</th>";
               // echo "<th>HRA</th>";
               // echo "<th>CONVEYANCE</th>";
@@ -98,7 +98,7 @@
                 // echo "<td>" . $row['GENDER'] . "</td>";
 
 
-                // echo "<td>" . $row['EMI'] . "</td>";
+                 echo "<td>" . $row['EMI'] . "</td>";
                 // echo "<td>" . $row['BASIC_DAA'] . "</td>";
                 // echo "<td>" . $row['HRA'] . "</td>";
                 // echo "<td>" . $row['CONVEYANCE'] . "</td>";
