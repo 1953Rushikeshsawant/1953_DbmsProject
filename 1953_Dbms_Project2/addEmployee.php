@@ -7,7 +7,7 @@ $LNAME=$_POST['LNAME'];
 $CITY=$_POST['CITY'];
 $STATE=$_POST['STATE'];
 $DOB=$_POST['DOB'];
-$PHONE_NO=$_POST['PHONE_NO'];
+// $PHONE_NO=$_POST['PHONE_NO'];
 $BANK_ACC_NO=$_POST['BANK_ACC_NO'];
 $EMAIL=$_POST['EMAIL'];
 
@@ -24,7 +24,7 @@ if($mysqli === false){
 
 $EID=$_SESSION['EID'];
 $sql = "UPDATE Employee
-SET FNAME = '$FNAME', LNAME= '$LNAME',CITY = '$CITY',STATE = '$STATE',DOB = '$DOB',PHONE_NO = '$PHONE_NO',BANK_ACC_NO = '$BANK_ACC_NO',GENDER='$GENDER'
+SET FNAME = '$FNAME', LNAME= '$LNAME',CITY = '$CITY',STATE = '$STATE',DOB = '$DOB',BANK_ACC_NO = '$BANK_ACC_NO',GENDER='$GENDER'
 WHERE EMAIL='$EMAIL' AND EID='$EID'";
 
 //IF FINANCE AND SENIOR
@@ -103,7 +103,7 @@ echo "<script>alert('received!'); location.href='AddEmployee.html';</script>";
 
 
 } else{
-echo "<script>alert('ERROR: Could not able to execute!'); location.href='AddEmployee.html';</script>";
+echo "<script>alert('ERROR:.Check email Id Or Bank account Number!'); location.href='AddEmployee.html';</script>";
 
 
 }

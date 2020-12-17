@@ -26,7 +26,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Check if username is empty
     if(empty(trim($_POST["EMAIL"]))){
         $ACC_EMAIL_ERR = "Please enter EMAIL.";
-        echo "<script>alert('Please enter EMAIL.')</script>";
+        // echo "<script>alert('Please enter EMAIL.')</script>";
 
     } else{
         $ACC_EMAIL = trim($_POST["EMAIL"]);
@@ -35,7 +35,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Check if password is empty
     if(empty(trim($_POST["PASSWORD"]))){
         $ACC_PASSWORD_ERR = "Please enter your password.";
-        echo "<script>alert('Please enter your password')</script>";
+        // echo "<script>alert('Please enter your password')</script>";
 
     } else{
        $ACC_PASSWORD= trim($_POST["PASSWORD"]);
@@ -81,19 +81,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         } else{
                             // Display an error message if password is not valid
                             $ACC_PASSWORD_ERR = "The password you entered was not valid.";
-                            echo "<script>alert('The password you entered was not valid.')</script>";
+                            // echo "<script>alert('The password you entered was not valid.')</script>";
 
                         }
                     }
                 } else{
                     // Display an error message if username doesn't exist
                     $ACC_EMAIL_ERR = "No account found with that username.";
-                    echo "<script>alert('No account found with that username.')</script>";
+                    // echo "<script>alert('No account found with that username.')</script>";
 
                 }
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
-                echo "<script>alert('Oops! Something went wrong. Please try again later.')</script>";
+                // echo "<script>alert('Oops! Something went wrong. Please try again later.')</script>";
 
             }
             // Close statement

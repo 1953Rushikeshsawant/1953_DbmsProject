@@ -10,7 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
     <style type="text/css">
         .wrapper{
-            width: 650px;
+          width: window.innerwidth;
             margin: 0 auto;
         }
         .page-header h2{
@@ -42,71 +42,24 @@
                     if($mysqli === false){
                         die("ERROR: Could not connect. " . $mysqli->connect_error);
                     }
-
+                      $EARNING="";
                     // Attempt select query execution
-                     $sql="SELECT * FROM SALARY,EMPLOYEE WHERE EMPLOYEE.EID=$EID AND SALARY.EID=EMPLOYEE.EID   ";
+                     $sql="SELECT * FROM SALARY,EMPLOYEE WHERE EMPLOYEE.EID=$EID AND SALARY.EID=EMPLOYEE.EID";
 
                      $sql2="SELECT * FROM DEPARTMENT,FIXED_SALARY WHERE DEPARTMENT.FID=FIXED_SALARY.FID AND DEPARTMENT.EID=$EID";
 
-                    if($result = $mysqli->query($sql)){
-                        if($result->num_rows > 0){
-                            echo "<table class='table table-bordered table-striped'>";
-                                echo "<thead>";
-                                    echo "<tr>";
-                                    echo "<th>DATE</th>";
-
-                                         echo "<th>EID</th>";
-                                         echo "<th>FNAME</th>";
-                                         echo "<th>LNAME</th>";
-
-                                         echo "<th>BANK_ACC_NO</th>";
-
-                                        echo "<th>EMI</th>";
-
-
-                                         echo "<th>TOTAL EARNING</th>";
-                                         echo "<th>TOTAL DEDUCTION</th>";
-                                         echo "<th>NET SALARY</th>";
 
 
 
-
-                                    echo "</tr>";
-                                echo "</thead>";
-                                echo "<tbody>";
-                                while($row = $result->fetch_array()){
-                                    echo "<tr>";
-                                        echo "<td>" . $row['pay_date'] . "</td>";
-
-                                         echo "<td>" . $row['EID'] . "</td>";
-                                         echo "<td>" . $row['FNAME'] . "</td>";
-                                         echo "<td>" . $row['LNAME'] . "</td>";
-
-                                         echo "<td>" . $row['BANK_ACC_NO'] . "</td>";
-
-
-                                         echo "<td>" . $row['EMI'] . "</td>";
-
-                                          echo "<td>" . $row['EARNING'] . "</td>";
-                                          echo "<td>" . $row['DEDUCTION'] . "</td>";
-                                          echo "<td>" . $row['NET_SALARY'] . "</td>";
-
-
-
-                                    echo "</tr>";
-                                }
-                                echo "</tbody>";
-                            echo "</table>";
-                            // Free result set
-                            $result->free();
-                        } else{
-                            echo "<p class='lead'><em>No records were found.</em></p>";
-                        }
-                    }
                     if($result2 = $mysqli->query($sql2)){
                         if($result2->num_rows > 0){
                             echo "<table class='table table-bordered table-striped'>";
                                 echo "<thead>";
+                                echo "<tr>";
+                                echo "<th>
+                                <h3>  FIXED SALARY </h3>
+                                </th>";
+                                echo "</tr>";
                                     echo "<tr>";
 
                                         echo "<th>BASIC & DA</th>";
@@ -115,9 +68,6 @@
                                         echo "<th>ESI</th>";
                                         echo "<th>PF</th>";
                                         echo "<th>TAX</th>";
-
-
-
 
                                     echo "</tr>";
                                 echo "</thead>";
@@ -138,8 +88,61 @@
                                 }
                                 echo "</tbody>";
                             echo "</table>";
+
+
                             // Free result set
                             $result2->free();
+                        } else{
+                            echo "<p class='lead'><em>No records were found.</em></p>";
+                        }
+                    }
+                    if($result = $mysqli->query($sql)){
+                        if($result->num_rows > 0){
+                            echo "<table class='table table-bordered table-striped'>";
+                                echo "<thead>";
+
+
+                                    echo "<tr>";
+                                         echo "<th>DATE</th>";
+                                         echo "<th>Eid</th>";
+                                         echo "<th>Name</th>";
+                                         echo "<th>Surname</th>";
+                                         echo "<th>Bank Account Number</th>";
+                                         echo "<th>EMI</th>";
+                                         echo "<th>TOTAL EARNING</th>";
+                                         echo "<th>TOTAL DEDUCTION</th>";
+                                         echo "<th>NET SALARY</th>";
+                                         echo "<th>View</th>";
+
+                                    echo "</tr>";
+
+                                echo "</thead>";
+                                echo "<tbody>";
+                                while($row = $result->fetch_array()){
+
+                                    echo "<tr>";
+                                         echo "<td>" . $row['pay_date'] . "</td>";
+                                         echo "<td>" . $row['EID'] . "</td>";
+                                         echo "<td>" . $row['FNAME'] . "</td>";
+                                         echo "<td>" . $row['LNAME'] . "</td>";
+                                         echo "<td>" . $row['BANK_ACC_NO'] . "</td>";
+                                         echo "<td>" . $row['EMI'] . "</td>";
+
+                                          echo "<td>" . $row['EARNING'] . "</td>";
+                                          echo "<td>" . $row['DEDUCTION'] . "</td>";
+                                          echo "<td>" . $row['NET_SALARY'] . "</td>";
+
+
+
+                                          echo "<td>";
+                                          echo "<a href='EmpRead.php?EID=". $row['EID'] ."' title='View Record' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open'></span></a>";
+                                          echo "</td>";
+                                    echo "</tr>";
+                                }
+                                echo "</tbody>";
+                            echo "</table>";
+                            // Free result set
+                            $result->free();
                         } else{
                             echo "<p class='lead'><em>No records were found.</em></p>";
                         }
@@ -154,6 +157,7 @@
                     // Close connection
                     $mysqli->close();
                     ?>
+
                      <a href="AddEmployee.html">Back</a>
 
                 </div>

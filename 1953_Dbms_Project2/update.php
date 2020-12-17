@@ -1,5 +1,5 @@
 <?php
-// session_start();
+ session_start();
 // Include config file
 $mysqli = new mysqli("localhost", "root", "", "salarymanagementsytem2");
 if($mysqli === false){
@@ -12,9 +12,15 @@ $EMI=$PAY_DATE="";
 $EMI_ERR =$PAY_DATE_ERR="";
 
 // Processing form data when form is submitted
-if(isset($_POST["EID"]) && !empty($_POST["EID"])){
+if((isset($_POST["EID"]) && !empty($_POST["EID"])) && (isset($_POST["SID"]) && !empty($_POST["SID"]))){
+// if(isset($_POST["EID"]) && !empty($_POST["EID"])){
+
+// if (isset($_POST["EID"],$_POST["SID"]) &&!empty($_POST["EID"],($_POST["SID"]))) {
+  // code...
+
   // Get hidden input value
   $EID = $_POST["EID"];
+  $SID=$_POST["SID"];
 
   // Validate
   $input_emi = trim($_POST["EMI"]);
@@ -25,73 +31,6 @@ if(isset($_POST["EID"]) && !empty($_POST["EID"])){
   {
     $PAY_DATE = $input_PAY_DATE;
   }
-  // //Validate
-  // $input_basic_da = trim($_POST["BASIC_DA"]);
-  // if(empty($input_basic_da)){
-  //   $BASIC_DA_ERR = "Please enter an BASIC SALARY.";
-  // } else{
-  //   $BASIC_DA = $input_basic_da;
-  // }
-  //
-  //
-  // // Validate
-  // $input_earning = trim($_POST["EARNING"]);
-  // if(empty($input_earning)){
-  //   $EARNING_ERR = "Please enter the EARNING amount.";
-  // } else{
-  //   $EARNING = $input_earning;
-  // }
-  //
-  //
-  // $input_net_salary = trim($_POST["NET_SALARY"]);
-  // if(empty($input_net_salary)){
-  //   $NET_SALARY_ERR = "Please enter the NET SALARY.";
-  // } else{
-  //   $NET_SALARY = $input_net_salary;
-  // }
-  //
-  //
-  // $input_deduction = trim($_POST["DEDUCTION"]);
-  // if(empty($input_deduction)){
-  //   $DEDUCTION_ERR = "Please enter the DEDUCTION amount.";
-  // } else{
-  //   $DEDUCTION = $input_deduction;
-  // }
-  //
-  // $input_conveyance = trim($_POST["CONVEYANCE"]);
-  // if(empty($input_conveyance)){
-  //   $CONVEYANCE_ERR = "Please enter the CONVEYANCE amount.";
-  // }  else{
-  //   $CONVEYANCE = $input_conveyance;
-  // }
-  //
-  // $input_esi = trim($_POST["ESI"]);
-  // if(empty($input_esi)){
-  //   $ESI_ERR = "Please enter the ESI amount.";
-  // }  else{
-  //   $ESI = $input_esi;
-  // }
-  //
-  // $input_pf = trim($_POST["PF"]);
-  // if(empty($input_pf)){
-  //   $PF_ERR = "Please enter the PF amount.";
-  // }  else{
-  //   $PF = $input_pf;
-  // }
-  //
-  // $input_tax = trim($_POST["TAX"]);
-  // if(empty($input_tax)){
-  //   $TAX_ERR = "Please enter the TAX amount.";
-  // }  else{
-  //   $TAX = $input_tax;
-  // }
-  //
-  // $input_hra = trim($_POST["HRA"]);
-  // if(empty($input_hra)){
-  //   $HRA_ERR = "Please enter the HRA amount.";
-  // }  else{
-  //   $HRA = $input_hra;
-  // }
 
   // Check input errors before inserting in database
 
@@ -101,27 +40,19 @@ if(isset($_POST["EID"]) && !empty($_POST["EID"])){
   //   $sql = "UPDATE SALARY SET EMI=?, DEDUCTION=?, EARNING=? ,NET_SALARY=?,BASIC_DAA=?,HRA=?,CONVEYANCE=?,ESI=?,PF=?, TAX=? WHERE SID=?";
   if( empty($EMI_ERR) && empty($PAY_DATE_ERR) ){
     // Prepare an update statement
-    $sql = "UPDATE SALARY SET EMI=? ,pay_date=? WHERE EID=?";
+    $sql = "UPDATE SALARY SET EMI=? ,pay_date=? WHERE EID=? AND SID=?";
 
     if($stmt = $mysqli->prepare($sql)){
       // Bind variables to the prepared statement as parameters
       // $stmt->bind_param("ssssssssssi", $param_EMI, $param_DEDUCTION, $param_EARNING,$param_NET_SALARY,$param_BASIC_DA,$param_HRA,$param_CONVEYANCE,$param_ESI,$param_PF,$param_TAX, $param_SID);
-      $stmt->bind_param("ssi",$param_EMI,$param_PAY_DATE, $param_EID);
+      $stmt->bind_param("ssii",$param_EMI,$param_PAY_DATE, $param_EID,$param_SID);
 
       // Set parameters
       $param_EMI = $EMI;
       $param_PAY_DATE = $PAY_DATE;
 
-      // $param_DEDUCTION = $DEDUCTION;
-      // $param_EARNING = $EARNING;
-      // $param_NET_SALARY = $NET_SALARY;
-      // $param_BASIC_DA=$BASIC_DA;
-      // $param_HRA=$HRA;
-      // $param_CONVEYANCE=$CONVEYANCE;
-      // $param_ESI=$ESI;
-      // $param_PF=$PF;
-      // $param_TAX=$TAX;
        $param_EID=$EID;
+        $param_SID=$SID;
 
 
       // Attempt to execute the prepared statement
@@ -146,18 +77,27 @@ if(isset($_POST["EID"]) && !empty($_POST["EID"])){
     $mysqli->close();
  } else{
    // Check existence of id parameter before processing further
-   if(isset($_GET["EID"]) && !empty(trim($_GET["EID"]))){
+   if((isset($_GET["EID"]) && !empty(trim($_GET["EID"]))) && (isset($_GET["SID"]) && !empty(trim($_GET["SID"])))){
+     // if(isset($_GET["EID"]) && !empty(trim($_GET["EID"]))){
+
+     // if (isset($_GET["EID"],$_GET["SID"]) && !empty(trim($_GET["EID"],$_GET["SID"]))) {
+       // code...
+
      // Get URL parameter
      $EID =  trim($_GET["EID"]);
+     $SID =  trim($_GET["SID"]);
+
 
      // Prepare a select statement
-     $sql = "SELECT * FROM SALARY WHERE EID = ?";
+     // AND SID=?
+     $sql = "SELECT * FROM SALARY WHERE EID = ? AND SID=?";
      if($stmt = $mysqli->prepare($sql)){
        // Bind variables to the prepared statement as parameters
-       $stmt->bind_param("i", $param_EID);
+       $stmt->bind_param("ii", $param_EID,$param_SID);
 
        // Set parameters
        $param_EID = $EID;
+       $param_SID=$SID;
 
        // Attempt to execute the prepared statement
        if($stmt->execute()){
@@ -171,6 +111,7 @@ if(isset($_POST["EID"]) && !empty($_POST["EID"])){
 
            $EMI = $row["EMI"];
             $PAY_DATE = $row["pay_date"];
+            // $SID=$row["SID"];
 //           $DEDUCTION = $row["DEDUCTION"];
 //           $EARNING = $row["EARNING"];
 //           $NET_SALARY = $row["NET_SALARY"];
@@ -183,7 +124,9 @@ if(isset($_POST["EID"]) && !empty($_POST["EID"])){
 //
         } else{
            // URL doesn't contain valid id. Redirect to error page
-           header("location: error.php");
+           // header("location: error.php");
+           echo "<script>alert('URL doesn't contain valid id.!'); location.href='AccViewSalary.php';</script>";
+          // echo "1";
            exit();
          }
 
@@ -199,7 +142,11 @@ if(isset($_POST["EID"]) && !empty($_POST["EID"])){
 
   }  else{
     // URL doesn't contain id parameter. Redirect to error page
-    header("location: error.php");
+    // header("location: error.php");
+    echo "<script>alert('URL doesn't contain id parameter.!'); location.href='AccViewSalary.php';</script>";
+
+    // echo "2";
+
     exit();
   }
 }
@@ -294,6 +241,8 @@ if(isset($_POST["EID"]) && !empty($_POST["EID"])){
 
 
             <input type="hidden" name="EID" value="<?php echo $EID; ?>"/>
+            <input type="hidden" name="SID" value="<?php echo $SID; ?>"/>
+
             <input type="submit" class="btn btn-primary" value="Submit">
             <a href="AccViewSalary.php" class="btn btn-default">Cancel</a>
           </form>

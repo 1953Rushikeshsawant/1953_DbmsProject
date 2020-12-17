@@ -81,14 +81,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         } else{
                             // Display an error message if password is not valid
                             $PASSWORD_ERR = "The password you entered was not valid.";
-                            echo "<script>alert('The password you entered was not valid.')</script>";
+                            // echo "<script>alert('The password you entered was not valid.')</script>";
 
                         }
                     }
                 } else{
                     // Display an error message if username doesn't exist
                     $EMAIL_ERR = "No account found with that username.";
-                    echo "<script>alert('No account found with that username.')</script>";
+                    // echo "<script>alert('No account found with that username.')</script>";
 
                 }
             } else{

@@ -10,7 +10,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
   <style type="text/css">
   .wrapper{
-    width: 650px;
+    width: window.innerwidth;
     margin: 0 auto;
   }
   .page-header h2{
@@ -32,13 +32,14 @@
       <div class="row">
         <div class="col-md-12">
           <div class="page-header clearfix">
-            <h2 class="pull-left">Employees Details</h2>
+            <h2 class="pull-left">Employees Salary</h2>
 
             <a href="AddSalary.html" class="btn btn-primary pull-right">Add New Salary</a>
 
           </div>
 
           <?php
+          session_start();
           $mysqli = new mysqli("localhost", "root", "", "salarymanagementsytem2");
           if($mysqli === false){
             die("ERROR: Could not connect. " . $mysqli->connect_error);
@@ -46,14 +47,16 @@
 
           // Attempt select query execution
           //$sql = "SELECT * FROM employee";
-          $sql="SELECT * FROM SALARY,EMPLOYEE WHERE SALARY.EID=EMPLOYEE.EID ";
-
+          $sql="SELECT * FROM SALARY,EMPLOYEE WHERE SALARY.EID=EMPLOYEE.EID";
+//
           if($result = $mysqli->query($sql)){
             if($result->num_rows > 0){
               echo "<table class='table table-bordered table-striped'>";
               echo "<thead>";
               echo "<tr>";
               echo "<th>EID</th>";
+
+
               echo "<th>FNAME</th>";
               echo "<th>LNAME</th>";
               // echo "<th>CITY</th>";
@@ -78,6 +81,8 @@
               echo "<th>NET SALARY</th>";
 
               echo "<th>PAYMENT DATE</th>";
+              echo "<th>SID</th>";
+
 
               echo "<th>ACTION</th>";
 
@@ -92,34 +97,26 @@
                 echo "<td>" . $row['EID'] . "</td>";
                 echo "<td>" . $row['FNAME'] . "</td>";
                 echo "<td>" . $row['LNAME'] . "</td>";
-                // echo "<td>" . $row['CITY'] . "</td>";
-                // echo "<td>" . $row['STATE'] . "</td>";
-                // echo "<td>" . $row['DOB'] . "</td>";
-                // echo "<td>" . $row['EMAIL'] . "</td>";
-                // echo "<td>" . $row['PASSWORD'] . "</td>";
-                // echo "<td>" . $row['PHONE_NO'] . "</td>";
                 echo "<td>" . $row['BANK_ACC_NO'] . "</td>";
-                // echo "<td>" . $row['GENDER'] . "</td>";
+                echo "<td>" . $row['EMI'] . "</td>";
 
-
-                 echo "<td>" . $row['EMI'] . "</td>";
-                // echo "<td>" . $row['BASIC_DAA'] . "</td>";
-                // echo "<td>" . $row['HRA'] . "</td>";
-                // echo "<td>" . $row['CONVEYANCE'] . "</td>";
-                // echo "<td>" . $row['ESI'] . "</td>";
-                // echo "<td>" . $row['PF'] . "</td>";
-                // echo "<td>" . $row['TAX'] . "</td>";
 
                 echo "<td>" . $row['EARNING'] . "</td>";
                 echo "<td>" . $row['DEDUCTION'] . "</td>";
                 echo "<td>" . $row['NET_SALARY'] . "</td>";
                 echo "<td>" . $row['pay_date'] . "</td>";
+                echo "<td>" . $row['SID'] . "</td>";
+
 
 
                 echo "<td>";
                 echo "<a href='read.php?EID=". $row['EID'] ."' title='View Record' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open'></span></a>";
-                echo "<a href='update.php?EID=". $row['EID'] ."' title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
-                echo "<a href='delete.php?EID=". $row['EID'] ."' title='Delete Record' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>";
+                 echo "<a href='update.php?EID=". $row['EID'] ."&SID=".$row['SID']."' title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
+
+                // echo "<a href='update.php?EID=".$row['EID']."' title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
+                echo "<a href='delete.php?EID=". $row['EID'] ."&SID=".$row['SID']."' title='Delete Record' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>";
+
+                // echo "<a href='delete.php?EID=". $row['EID'] ."' title='Delete Record' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>";
                 echo "</td>";
                 echo "</tr>";
               }

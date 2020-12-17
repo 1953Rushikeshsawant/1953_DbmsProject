@@ -1,4 +1,5 @@
 <?php
+session_start();
 $FNAME=$_POST['FNAME'];
 $LNAME=$_POST['LNAME'];
 $BANK_ACC_NO=$_POST['BANK_ACC_NO'];
