@@ -32,8 +32,6 @@ if(isset($_GET["EID"]) && !empty(trim($_GET["EID"]))){
 
         // Retrieve individual field value
 
-
-      //  $EMI=$row['EMI'] ;
         $BASIC_DAA=$row['BASIC_DAA'] ;
         $HRA= $row['HRA'] ;
         $CONVEYANCE=$row['CONVEYANCE'] ;
@@ -41,9 +39,6 @@ if(isset($_GET["EID"]) && !empty(trim($_GET["EID"]))){
         $PF= $row['PF'] ;
         $TAX=$row['TAX'] ;
 
-        // $EARNING= $row['EARNING'] ;
-        // $DEDUCTION=$row['DEDUCTION'] ;
-        // $NET_SALARY= $row['NET_SALARY'] ;
       } else{
         // URL doesn't contain valid id parameter. Redirect to error page
         header("location: error.php");
@@ -56,8 +51,6 @@ if(isset($_GET["EID"]) && !empty(trim($_GET["EID"]))){
     // Close statement
     $stmt->close();
   }
-
-
 
   // Close connection
   $mysqli->close();
@@ -74,9 +67,41 @@ if(isset($_GET["EID"]) && !empty(trim($_GET["EID"]))){
   <title>View Record</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
   <style type="text/css">
+  body{
+
+    font-family: monospace;
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;
+    background-image: url("https://images.pexels.com/photos/1173987/pexels-photo-1173987.jpeg?cs=srgb&dl=pexels-jesse-yelin-1173987.jpg&fm=jpg");
+    text-align:center;
+    padding-bottom: 5rem;
+    padding-top: 1rem;
+
+  }
+
+  h1 {
+    padding-bottom: 2rem;
+  }
+
+  h2 {
+    padding-bottom: 2rem;
+    text-decoration: underline;
+    font-size: 4rem;
+
+  }
+  p{
+    color:white;
+    font-weight: bold ;
+    text-decoration: underline;
+  }
   .wrapper{
     width: 500px;
     margin: 0 auto;
+    border-style: solid ;
+    border-color: white;
+    border-width: 10px;
+
   }
   </style>
 </head>
@@ -88,10 +113,7 @@ if(isset($_GET["EID"]) && !empty(trim($_GET["EID"]))){
           <div class="page-header">
             <h1>View SALARY</h1>
           </div>
-          <!-- <div class="form-group">
-            <label>EMI</label>
-            <p class="form-control-static"><?php echo $row["EMI"]; ?></p>
-          </div> -->
+
           <div class="form-group">
             <label>BASIC_DAA</label>
             <p class="form-control-static"><?php echo $row["BASIC_DAA"]; ?></p>
@@ -116,18 +138,7 @@ if(isset($_GET["EID"]) && !empty(trim($_GET["EID"]))){
             <label>TAX</label>
             <p class="form-control-static"><?php echo $row["TAX"]; ?></p>
           </div>
-          <!-- <div class="form-group">
-            <label>DEDUCTION</label>
-            <p class="form-control-static"><?php echo $row["DEDUCTION"]; ?></p>
-          </div>
-          <div class="form-group">
-            <label>EARNING</label>
-            <p class="form-control-static"><?php echo $row["EARNING"]; ?></p>
-          </div>
-          <div class="form-group">
-            <label>NET SALARY</label>
-            <p class="form-control-static"><?php echo $row["NET_SALARY"]; ?></p>
-          </div> -->
+
           <p><a href="AccViewSalary.php" class="btn btn-primary">Back</a></p>
         </div>
       </div>

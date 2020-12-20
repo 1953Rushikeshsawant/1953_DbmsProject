@@ -9,7 +9,6 @@ if(isset($_GET["EID"]) && !empty(trim($_GET["EID"]))){
   }
 
   // Prepare a select statement  FIXED SALARY AND SALARY
-  // $sql = "SELECT * FROM SALARY WHERE EID = ?";
 
   $sql2= "SELECT * FROM DEPARTMENT,FIXED_SALARY WHERE EID=? AND DEPARTMENT.FID=FIXED_SALARY.FID ";
 
@@ -32,8 +31,6 @@ if(isset($_GET["EID"]) && !empty(trim($_GET["EID"]))){
 
         // Retrieve individual field value
 
-
-      //  $EMI=$row['EMI'] ;
         $BASIC_DAA=$row['BASIC_DAA'] ;
         $HRA= $row['HRA'] ;
         $CONVEYANCE=$row['CONVEYANCE'] ;
@@ -41,9 +38,6 @@ if(isset($_GET["EID"]) && !empty(trim($_GET["EID"]))){
         $PF= $row['PF'] ;
         $TAX=$row['TAX'] ;
 
-        // $EARNING= $row['EARNING'] ;
-        // $DEDUCTION=$row['DEDUCTION'] ;
-        // $NET_SALARY= $row['NET_SALARY'] ;
       } else{
         // URL doesn't contain valid id parameter. Redirect to error page
         header("location: error.php");
@@ -57,8 +51,6 @@ if(isset($_GET["EID"]) && !empty(trim($_GET["EID"]))){
     $stmt->close();
   }
 
-
-
   // Close connection
   $mysqli->close();
 } else{
@@ -67,6 +59,8 @@ if(isset($_GET["EID"]) && !empty(trim($_GET["EID"]))){
   exit();
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,10 +82,7 @@ if(isset($_GET["EID"]) && !empty(trim($_GET["EID"]))){
           <div class="page-header">
             <h1>View SALARY</h1>
           </div>
-          <!-- <div class="form-group">
-            <label>EMI</label>
-            <p class="form-control-static"><?php echo $row["EMI"]; ?></p>
-          </div> -->
+
           <div class="form-group">
             <label>BASIC_DAA</label>
             <p class="form-control-static"><?php echo $row["BASIC_DAA"]; ?></p>
@@ -116,18 +107,7 @@ if(isset($_GET["EID"]) && !empty(trim($_GET["EID"]))){
             <label>TAX</label>
             <p class="form-control-static"><?php echo $row["TAX"]; ?></p>
           </div>
-          <!-- <div class="form-group">
-            <label>DEDUCTION</label>
-            <p class="form-control-static"><?php echo $row["DEDUCTION"]; ?></p>
-          </div>
-          <div class="form-group">
-            <label>EARNING</label>
-            <p class="form-control-static"><?php echo $row["EARNING"]; ?></p>
-          </div>
-          <div class="form-group">
-            <label>NET SALARY</label>
-            <p class="form-control-static"><?php echo $row["NET_SALARY"]; ?></p>
-          </div> -->
+
           <p><a href="EmpViewSalary.php" class="btn btn-primary">Back</a></p>
         </div>
       </div>

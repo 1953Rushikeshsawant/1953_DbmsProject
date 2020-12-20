@@ -1,59 +1,3 @@
-<!-- // /* Attempt MySQL server connection. Assuming you are running MySQL
-// server with default setting (user 'root' with no password) */
-// $link = mysqli_connect("localhost", "root", "", "salarymanagementsytem2");
-//
-// // Check connection
-// if($link === false){
-//   die("ERROR: Could not connect. " . mysqli_connect_error());
-// }
-//
-// // Attempt select query execution
-// $sql = "SELECT * FROM employee";
-// if($result = mysqli_query($link, $sql)){
-//   if(mysqli_num_rows($result) > 0){
-//     echo "<table>";
-//     echo "<tr>";
-//     echo "<th>Eid</th>";
-//     echo "<th>first_name</th>";
-//     echo "<th>last_name</th>";
-//     echo "<th>City</th>";
-//     echo "<th>State</th>";
-//     echo "<th>DOB</th>";
-//     echo "<th>Email</th>";
-//     // echo "<th>password</th>";
-//     // echo "<th>Phone No</th>";
-//     echo "<th>Bank Acc No</th>";
-//     echo "<th>gender</th>";
-//     echo "</tr>";
-//     while($row = mysqli_fetch_array($result)){
-//       echo "<tr>";
-//       echo "<td>" . $row['EID'] . "</td>";
-//       echo "<td>" . $row['FNAME'] . "</td>";
-//       echo "<td>" . $row['LNAME'] . "</td>";
-//       echo "<td>" . $row['CITY'] . "</td>";
-//       echo "<td>" . $row['STATE'] . "</td>";
-//       echo "<td>" . $row['DOB'] . "</td>";
-//       echo "<td>" . $row['EMAIL'] . "</td>";
-//       // echo "<td>" . $row['PASSWORD'] . "</td>";
-//       // echo "<td>" . $row['PHONE_NO'] . "</td>";
-//       echo "<td>" . $row['BANK_ACC_NO'] . "</td>";
-//       echo "<td>" . $row['GENDER'] . "</td>";
-//
-//       echo "</tr>";
-//     }
-//     echo "</table>";
-//     // Free result set
-//     mysqli_free_result($result);
-//   } else{
-//     echo "No records matching your query were found.";
-//   }
-// } else{
-//   echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
-// }
-//
-// // Close connection
-// mysqli_close($link); -->
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -64,6 +8,23 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
   <style type="text/css">
+  body{
+
+    font-family: monospace;
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    background-image: url("https://images.pexels.com/photos/1173987/pexels-photo-1173987.jpeg?cs=srgb&dl=pexels-jesse-yelin-1173987.jpg&fm=jpg");
+    text-align:center;
+  }
+  td{
+    color: black;
+  }
+  tr
+  {
+    background-color:white;
+    color:black;
+  }
   .wrapper{
     width: window.innerwidth;
     margin: 0 auto;
@@ -100,74 +61,55 @@
           }
 
           // Attempt select query execution
-          //$sql = "SELECT * FROM employee";
-          $sql = "SELECT * FROM EMPLOYEE,DEPARTMENT WHERE DEPARTMENT.EID=EMPLOYEE.EID";
-         if($result = $mysqli->query($sql)){
-           if($result->num_rows > 0){
+          $sql = "SELECT * FROM EMPLOYEE,DEPARTMENT WHERE EMPLOYEE.EID=DEPARTMENT.EID";
+          if($result = $mysqli->query($sql)){
+            if($result->num_rows > 0){
 
-             echo "<table class='table table-bordered table-striped'>";
-             echo "<thead>";
+              echo "<table class='table table-bordered table-striped'>";
+              echo "<thead>";
 
-             echo "<tr>";
-             echo "<th>Eid</th>";
-             echo "<th>first_name</th>";
-             echo "<th>last_name</th>";
-             echo "<th>City</th>";
-             echo "<th>State</th>";
-             echo "<th>DOB</th>";
-             echo "<th>Email</th>";
-             // echo "<th>password</th>";
-             // echo "<th>Phone No</th>";
-             echo "<th>Bank Acc No</th>";
-             echo "<th>gender</th>";
-             echo "<th>Department</th>";
-             echo "<th>Designation</th>";
+              echo "<tr>";
+              echo "<th>Eid</th>";
+              echo "<th>First Name</th>";
+              echo "<th>Last Name</th>";
+              echo "<th>City</th>";
+              echo "<th>State</th>";
+              echo "<th>DOB</th>";
+              echo "<th>Email</th>";
+              echo "<th>Bank Account Number</th>";
+              echo "<th>Gender</th>";
+              echo "<th>Department</th>";
+              echo "<th>Designation</th>";
 
 
-             echo "</tr>";
-             while($row = $result->fetch_array()){
-               echo "<tr>";
-               echo "<td>" . $row['EID'] . "</td>";
-               echo "<td>" . $row['FNAME'] . "</td>";
-               echo "<td>" . $row['LNAME'] . "</td>";
-               echo "<td>" . $row['CITY'] . "</td>";
-               echo "<td>" . $row['STATE'] . "</td>";
-               echo "<td>" . $row['DOB'] . "</td>";
-               echo "<td>" . $row['EMAIL'] . "</td>";
-               // echo "<td>" . $row['PASSWORD'] . "</td>";
-               // echo "<td>" . $row['PHONE_NO'] . "</td>";
-               echo "<td>" . $row['BANK_ACC_NO'] . "</td>";
-               echo "<td>" . $row['GENDER'] . "</td>";
-               echo "<td>" . $row['DEPT_NAME'] . "</td>";
-               echo "<td>" . $row['DESIGNATION'] . "</td>";
+              echo "</tr>";
+              while($row = $result->fetch_array()){
+                echo "<tr>";
+                echo "<td>" . $row['EID'] . "</td>";
+                echo "<td>" . $row['FNAME'] . "</td>";
+                echo "<td>" . $row['LNAME'] . "</td>";
+                echo "<td>" . $row['CITY'] . "</td>";
+                echo "<td>" . $row['STATE'] . "</td>";
+                echo "<td>" . $row['DOB'] . "</td>";
+                echo "<td>" . $row['EMAIL'] . "</td>";
+                echo "<td>" . $row['BANK_ACC_NO'] . "</td>";
+                echo "<td>" . $row['GENDER'] . "</td>";
+                echo "<td>" . $row['DEPT_NAME'] . "</td>";
+                echo "<td>" . $row['DESIGNATION'] . "</td>";
 
+                echo "</tr>";
+                echo "</thead>";
 
-               echo "</tr>";
-               echo "</thead>";
-
-             }
-
-                // // echo "<td>";
-                // // echo "<a href='read.php?EID=". $row['EID'] ."' title='View Record' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open'></span></a>";
-                // //  echo "<a href='update.php?EID=". $row['EID'] ."&SID=".$row['SID']."' title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
-                // //
-                // // // echo "<a href='update.php?EID=".$row['EID']."' title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
-                // // echo "<a href='delete.php?EID=". $row['EID'] ."&SID=".$row['SID']."' title='Delete Record' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>";
-                // //
-                // // // echo "<a href='delete.php?EID=". $row['EID'] ."' title='Delete Record' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>";
-                // // echo "</td>";
-                // echo "</tr>";
               }
-              echo "</tbody>";
-              echo "</table>";
-              // Free result set
-              $result->free();
-            } else{
-              echo "<p class='lead'><em>No records were found.</em></p>";
+
             }
-          //  else{
-          //   echo "ERROR: Could not able to execute $sql. " . $mysqli->error;
-          // }
+            echo "</tbody>";
+            echo "</table>";
+            // Free result set
+            $result->free();
+          } else{
+            echo "<p class='lead'><em>No records were found.</em></p>";
+          }
 
           // Close connection
           $mysqli->close();
@@ -176,7 +118,7 @@
         </div>
       </div>
     </div>
-    <a href="AddSalary.html" class="btn btn-primary pull-right">Back</a>
+    <a href="AddSalary.html" class="btn btn-primary ">Back</a>
 
   </div>
 

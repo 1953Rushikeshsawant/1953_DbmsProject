@@ -18,7 +18,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   // Validate username
   if(empty(trim($_POST["ACC_EMAIL"]))){
     $ACC_EMAIL_ERR = "Please enter a username.";
-    echo "<script>alert('Please enter a username!'); location.href='AccountantSignUp.html';</script>";
+    // echo "<script>alert('Please enter a username!'); location.href='AccountantSignUp.html';</script>";
 
 
   } else{
@@ -39,7 +39,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
         if($stmt->num_rows == 1){
           $ACC_EMAIL_ERR = "This username is already taken.";
-          echo "<script>alert('This username is already taken.!'); location.href='AccountantSignUp.html';</script>";
+          // echo "<script>alert('This username is already taken.!'); location.href='AccountantSignUp.html';</script>";
 
         } else{
           $ACC_EMAIL = trim($_POST["ACC_EMAIL"]);
@@ -56,11 +56,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   // Validate password
   if(empty(trim($_POST["ACC_PASSWORD"]))){
     $ACC_PASSWORD_ERR = "Please enter a password.";
-    echo "<script>alert('Please enter password !'); location.href='AccountantSignUp.html';</script>";
+    // echo "<script>alert('Please enter password !'); location.href='AccountantSignUp.html';</script>";
 
   } elseif(strlen(trim($_POST["ACC_PASSWORD"])) < 6){
     $ACC_PASSWORD_ERR = "Password must have atleast 6 characters.";
-    echo "<script>alert('Password must have atleast 6 characters.!'); location.href='AccountantSignUp.html';</script>";
+    // echo "<script>alert('Password must have atleast 6 characters.!'); location.href='AccountantSignUp.html';</script>";
 
   } else{
     $ACC_PASSWORD = trim($_POST["ACC_PASSWORD"]);
@@ -69,13 +69,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   // Validate confirm password
   if(empty(trim($_POST["CONFIRM_PASSWORD"]))){
     $CONFIRM_PASSWORD_ERR = "Please confirm password.";
-    echo "<script>alert('Please confirm password !'); location.href='AccountantSignUp.html';</script>";
+    // echo "<script>alert('Please confirm password !'); location.href='AccountantSignUp.html';</script>";
 
   } else{
     $CONFIRM_PASSWORD = trim($_POST["CONFIRM_PASSWORD"]);
     if(empty($ACC_PASSWORD_ERR) && ($ACC_PASSWORD != $CONFIRM_PASSWORD)){
       $CONFIRM_PASSWORD_ERR = "Password did not match.";
-      echo "<script>alert('Password did not match. !'); location.href='AccountantSignUp.html';</script>";
+      // echo "<script>alert('Password did not match. !'); location.href='AccountantSignUp.html';</script>";
 
     }
   }
@@ -104,12 +104,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $_SESSION["loggedin"] = true;
         $_SESSION["ACC_ID"] = $ACC_ID;
         $_SESSION["ACC_EMAIL"] = $ACC_EMAIL;
-        echo "<script>alert('Sign Up successful !'); location.href='AccountantLogin.php';</script>";
+        // echo "<script>alert('Sign Up successful !'); location.href='AccountantLogin.php';</script>";
 
-        // header("location: AddEmployee.html");
+        header("location: AccountantLogin.php");
       } else{
-        echo "Something went wrong. Please try again later.";
-        echo "<script>alert('Something went wrong. Please try again later.'); location.href='AccountantSignUp.html';</script>";
+        // echo "Something went wrong. Please try again later.";
+        echo "<script>alert('Something went wrong. Please try again later.'); location.href='AccountantSignUp.php';</script>";
 
       }
 
@@ -122,3 +122,71 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   $mysqli->close();
 }
 ?>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+
+  <style type="text/css">
+  body{
+    padding-bottom: 5rem;
+    padding-top:10rem;
+    padding-left: 50rem;
+    font-family: monospace;
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    background-image: url("https://images.pexels.com/photos/1173987/pexels-photo-1173987.jpeg?cs=srgb&dl=pexels-jesse-yelin-1173987.jpg&fm=jpg");
+
+    padding-top:10rem;
+    padding-left: 50rem;
+    text-align:center;
+  }
+  h1 {
+    padding-bottom: 2rem;
+  }
+
+  h2 {
+    padding-bottom: 2rem;
+    text-decoration: underline;
+  }
+  p{
+    color:black;
+  }
+  .wrapper{ width: 350px; padding: 20px; }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <h2>Sign Up</h2>
+    <p>Please fill this form to create an account.</p>
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+      <div class="form-group <?php echo (!empty($ACC_EMAIL_ERR)) ? 'has-error' : ''; ?>">
+        <label>Email Id</label>
+        <input type="text" name="ACC_EMAIL" class="form-control" value="<?php echo $ACC_EMAIL; ?>">
+        <span class="help-block"><?php echo $ACC_EMAIL_ERR; ?></span>
+      </div>
+      <div class="form-group <?php echo (!empty($ACC_PASSWORD_ERR)) ? 'has-error' : ''; ?>">
+        <label>Password</label>
+        <input type="password" name="ACC_PASSWORD" class="form-control" value="<?php echo $ACC_PASSWORD; ?>">
+        <span class="help-block"><?php echo $ACC_PASSWORD_ERR; ?></span>
+      </div>
+      <div class="form-group <?php echo (!empty($CONFIRM_PASSWORD_ERR)) ? 'has-error' : ''; ?>">
+        <label>Confirm Password</label>
+        <input type="password" name="CONFIRM_PASSWORD" class="form-control" value="<?php echo $CONFIRM_PASSWORD; ?>">
+        <span class="help-block"><?php echo $CONFIRM_PASSWORD_ERR; ?></span>
+      </div>
+      <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Submit">
+        <input type="reset" class="btn btn-default" value="Reset">
+      </div>
+      <p>Already have an account? <a href="AccountantLogin.php">Login here</a>.</p>
+    </form>
+  </div>
+</body>
+</html>

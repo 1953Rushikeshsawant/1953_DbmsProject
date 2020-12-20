@@ -1,3 +1,4 @@
+
 .navbar-brand{
   padding: 10px;
 }
@@ -17,3 +18,30 @@
 .MainClass{
   padding-left: 50px;
 }
+
+/* body{
+  padding-bottom: 5rem;
+  padding-top:10rem;
+  padding-left: 50rem;
+  font-family: monospace;
+  font-size: 2rem;
+  font-weight: bold;
+
+  color: white;
+  background-image: url("https://images.pexels.com/photos/1173987/pexels-photo-1173987.jpeg?cs=srgb&dl=pexels-jesse-yelin-1173987.jpg&fm=jpg");
+
+  padding-top:10rem;
+  padding-left: 50rem;
+  text-align:center;
+}
+h1 {
+  padding-bottom: 2rem;
+}
+
+h2 {
+  padding-bottom: 2rem;
+  text-decoration: underline;
+}
+p{
+  color:black;
+} */
